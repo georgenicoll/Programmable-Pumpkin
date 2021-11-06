@@ -15,18 +15,27 @@
 
 # sudo apt-get install python-gpiozero python3-gpiozero
 
+from time import sleep
 from pumpkinpi import PumpkinPi
 from gpiozero.tools import random_values
 from signal import pause
 
-pumpkin = PumpkinPi(pwm=True)
-leds = pumpkin.leds
+def pump_pulse(pumpkin):
+	for x in range(10):
+		leds = pumpkin.leds
+		for led in leds:
+			led.source_delay = 0.1
+			led.source = random_values()
 
-try:
-	for led in leds:
-		led.source_delay = 0.1
-		led.source = random_values()
-	pause()
-except KeyboardInterrupt:
-	pumpkin.off()
-	pumpkin.close()
+def main():
+	pumpkin = PumpkinPi(pwm=True)
+	try:
+		pump_pulse(pumpkin)
+		sleep(0.3)
+		pause()
+	except KeyboardInterrupt:
+		pumpkin.off()
+		pumpkin.close()
+
+if __name__ == "__main__":
+	main()

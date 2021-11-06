@@ -23,9 +23,13 @@ def pump_pulse(pumpkin):
     sleep(3)
     pumpkin.off()
 
-pumpkin = PumpkinPi(pwm=True)
+def main():
+    pumpkin = PumpkinPi(pwm=True)
 
-while True:
-    pump_pulse(pumpkin)
-else:
-    pumpkin.close()
+    while True:
+        pump_pulse(pumpkin)
+    else:
+        pumpkin.close()
+
+if __name__ == "__main__":
+    main()

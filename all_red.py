@@ -18,14 +18,15 @@ def pump_pulse(pumpkin):
     sleep(.5)
     pumpkin.sides.left.top.pulse(3, 0.5, 1)
     pumpkin.sides.right.top.pulse(3, 0.5, 1)
-    #sleep(.5)
-    #pumpkin.eyes.blink(.1, .1, 0, 0, 12) # Blink on for .1 seconds, off for .1 seconds, do not fade and do this 12 times.
-    sleep(3)
+    sleep(0.5)
     pumpkin.off()
 
-pumpkin = PumpkinPi(pwm=True)
+def main():
+    pumpkin = PumpkinPi(pwm=True)
+    while True:
+        pump_pulse(pumpkin)
+    else:
+        pumpkin.close()
 
-while True:
-    pump_pulse(pumpkin)
-else:
-    pumpkin.close()
+if __name__ == "__main__":
+    main()

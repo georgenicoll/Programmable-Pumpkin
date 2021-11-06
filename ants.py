@@ -16,16 +16,24 @@
 from pumpkinpi import PumpkinPi
 from time import sleep
 
-pumpkin = PumpkinPi()
-leds = pumpkin.leds
-
 step = [2,3,4,5,0,6,11,1,10,9,8,7]
 
-try:
-        for index in step:
-                leds[index].on()
-                sleep(0.2)
-                leds[index].off()
-except KeyboardInterrupt:
-        pumpkin.off()
-        pumpkin.close()
+def pump_pulse(pumpkin):
+	leds = pumpkin.leds
+	for index in step:
+		leds[index].on()
+		sleep(0.2)
+		leds[index].off()
+
+def main():
+	pumpkin = PumpkinPi()
+	try:
+		while True:
+			pump_pulse(pumpkin)
+			sleep(0.5)
+	except KeyboardInterrupt:
+		pumpkin.off()
+		pumpkin.close()
+
+if __name__ == "__main__":
+	main()
